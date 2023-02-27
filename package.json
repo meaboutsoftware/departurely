@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@commitlint/config-conventional": "^17.4.4",
@@ -28,6 +29,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-testing-library": "^5.10.2",
     "eslint-plugin-unicorn": "^45.0.2",
+    "husky": "^8.0.3",
     "jest": "^29.4.3",
     "next": "13.2.1",
     "prettier": "^2.8.4",
