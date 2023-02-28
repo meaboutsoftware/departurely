@@ -27,37 +27,48 @@ export default function SearchForm() {
   };
 
   return (
-    <div data-testid="search-form">
-      <h1>Search for trains connections</h1>
-      <form onSubmit={searchHandler}>
-        <div>
-          <div>
-            <input
-              data-testid="search-form-from"
-              placeholder="From"
-              type="text"
-              value={from}
-              onChange={onFromChange}
-              required
-            />
+    <div
+      className="flex items-center justify-center min-h-screen bg-gray-500"
+      data-testid="search-form"
+    >
+      <div className="px-8 py-6 mt-4 text-left bg-gray-300 shadow-lg border rounded-md">
+        <h3 className="text-2xl text-center">Find train connections</h3>
+        <form onSubmit={searchHandler}>
+          <div className="mt-4">
+            <div>
+              <input
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black"
+                data-testid="search-form-from"
+                placeholder="From"
+                type="text"
+                value={from}
+                onChange={onFromChange}
+                required
+              />
+            </div>
+            <div className="mt-4">
+              <input
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black"
+                data-testid="search-form-to"
+                placeholder="To"
+                type="text"
+                value={to}
+                onChange={onToChange}
+                required
+              />
+            </div>
           </div>
           <div>
-            <input
-              data-testid="search-form-to"
-              placeholder="To"
-              type="text"
-              value={to}
-              onChange={onToChange}
-              required
-            />
+            <button
+              className="px-40 py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg"
+              data-testid="search-form-submit"
+              type="submit"
+            >
+              Search
+            </button>
           </div>
-        </div>
-        <div>
-          <button data-testid="search-form-submit" type="submit">
-            Search
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
