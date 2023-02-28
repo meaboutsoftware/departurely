@@ -27,7 +27,7 @@ export default function ConnectionList({
   connections: ConnectionListItem[];
 }) {
   return (
-    <div>
+    <div data-testid="items-list">
       {connections &&
         connections.map((connection) => (
           <ConnectionItem
