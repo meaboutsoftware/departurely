@@ -14,7 +14,7 @@ export default function ConnectionItemOverview({
   transfers,
 }: ConnectionOverview) {
   return (
-    <section>
+    <div data-testId="item-overview">
       <div data-testId="item-overview-departure-time">
         Departure time: {departureTime}
       </div>
@@ -26,6 +26,6 @@ export default function ConnectionItemOverview({
         Number of stopovers: {transfers}
       </div>
       <br />
-    </section>
+    </div>
   );
 }
