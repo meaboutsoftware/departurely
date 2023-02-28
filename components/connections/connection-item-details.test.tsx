@@ -16,12 +16,14 @@ describe("ConnectionItemDetails", () => {
       />
     );
 
+    const itemDetails = screen.getByTestId("item-details");
     const arrivalTime = screen.getByTestId("item-details-arrival-time");
     const departureTime = screen.getByTestId("item-details-departure-time");
     const from = screen.getByTestId("item-details-from");
     const to = screen.getByTestId("item-details-to");
     const transfers = screen.getByTestId("item-details-stopovers");
 
+    expect(itemDetails).toBeInTheDocument();
     expect(arrivalTime).toBeInTheDocument();
     expect(departureTime).toBeInTheDocument();
     expect(from).toBeInTheDocument();

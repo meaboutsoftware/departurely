@@ -21,7 +21,7 @@ export default function ConnectionItemDetails({
   transfers,
 }: ConnectionDetails) {
   return (
-    <section>
+    <div data-testId="item-details">
       <div data-testId="item-details-from">From: {from} </div>
       <div data-testId="item-details-to">To: {to}</div>
       <div data-testId="item-details-departure-time">
@@ -50,6 +50,6 @@ export default function ConnectionItemDetails({
         })}
       </ul>
       <br />
-    </section>
+    </div>
   );
 }
