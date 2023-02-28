@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import SearchForm from "@/components/home/search-form";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
           content="Your new way to find connections between trains in Switzerland"
         />
       </Head>
-      <h1>Hello in Departurely</h1>
+      <SearchForm />
     </>
   );
 }
