@@ -28,7 +28,10 @@ export default function ConnectionItem({
   const formattedDuration = formatDuration(duration);
 
   return (
-    <div data-testid="item">
+    <div
+      className="bg-gray-300 shadow-md rounded-md p-4 mx-20"
+      data-testid="item"
+    >
       <ConnectionItemOverview
         test-dataId="item-overview"
         arrivalTime={formattedArrivalTime}
