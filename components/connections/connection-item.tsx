@@ -28,7 +28,7 @@ export default function ConnectionItem({
   const formattedDuration = formatDuration(duration);
 
   return (
-    <>
+    <div data-testid="item">
       <ConnectionItemOverview
         test-dataId="item-overview"
         arrivalTime={formattedArrivalTime}
@@ -45,6 +45,6 @@ export default function ConnectionItem({
         to={to}
         transfers={transfers}
       />
-    </>
+    </div>
   );
 }
