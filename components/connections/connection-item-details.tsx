@@ -21,16 +21,16 @@ export default function ConnectionItemDetails({
   transfers,
 }: ConnectionDetails) {
   return (
-    <div data-testId="item-details">
-      <div data-testId="item-details-from">From: {from} </div>
-      <div data-testId="item-details-to">To: {to}</div>
-      <div data-testId="item-details-departure-time">
+    <div data-testid="item-details">
+      <div data-testid="item-details-from">From: {from} </div>
+      <div data-testid="item-details-to">To: {to}</div>
+      <div data-testid="item-details-departure-time">
         Departure time: {departureTime}
       </div>
-      <div data-testId="item-details-arrival-time">
+      <div data-testid="item-details-arrival-time">
         Arrival time: {arrivalTime}
       </div>
-      <div data-testId="item-details-stopovers">
+      <div data-testid="item-details-stopovers">
         Number of stopovers: {transfers}
       </div>
       <ul>
