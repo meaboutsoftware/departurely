@@ -4,10 +4,14 @@ import Logo from "./logo";
 
 export default function TopNavigation() {
   return (
-    <header>
-      <Link href="/">
-        <Logo />
-      </Link>
-    </header>
+    <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+      <div className="flex items-center flex-shrink-0 text-white mr-6">
+        <span className="font-semibold text-xl tracking-tight">
+          <Link href="/">
+            <Logo />
+          </Link>
+        </span>
+      </div>
+    </nav>
   );
 }
