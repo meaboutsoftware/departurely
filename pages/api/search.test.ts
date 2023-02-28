@@ -1,143 +1,147 @@
-import "@testing-library/jest-dom";
-import { createMocks } from "node-mocks-http";
-import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
+import { NextApiRequest, NextApiResponse } from "next";
 import handler from "./search";
 
-function mockCall() {
-  const { req, res }: { req: NextApiRequest; res: NextApiResponse } =
-    createMocks();
+jest.mock("axios");
 
-  return { req, res };
-}
+describe("handler function", () => {
+  const response: NextApiResponse = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  } as unknown as NextApiResponse;
+  const defaultRequest: NextApiRequest = {
+    method: "GET",
+    query: {
+      from: "Wil",
+      to: "Lausanne",
+    },
+  } as unknown as NextApiRequest;
 
-describe("search", () => {
-  it("should return a 405 when HTTP method is POST", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: "0", limit: "1" };
-    req.method = "POST";
-
-    await handler(req, res);
-
-    expect(res.statusCode).toBe(405);
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it("should return a 405 when HTTP method is PUT", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: "0", limit: "1" };
-    req.method = "PUT";
+  it("should return 400 if any required query parameter is missing", async () => {
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: "0",
+      },
+    } as unknown as NextApiRequest;
 
-    await handler(req, res);
+    await handler(request, response);
 
-    expect(res.statusCode).toBe(405);
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
   });
 
-  it("should return a 405 when HTTP method is PATCH", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: "0", limit: "1" };
-    req.method = "PATCH";
+  it("should return 400 if any input is empty", async () => {
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "",
+        to: "Lausanne",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
 
-    await handler(req, res);
+    await handler(request, response);
 
-    expect(res.statusCode).toBe(405);
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
   });
 
-  it("should return a 405 when HTTP method is DELETE", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: "0", limit: "1" };
-    req.method = "DELETE";
+  it("should return 405 if HTTP method is not GET", async () => {
+    const request: NextApiRequest = {
+      method: "POST",
+    } as unknown as NextApiRequest;
 
-    await handler(req, res);
+    await handler(request, response);
 
-    expect(res.statusCode).toBe(405);
+    expect(response.status).toHaveBeenCalledWith(405);
+    expect(response.json).toHaveBeenCalledWith({
+      error: "Method not allowed.",
+    });
   });
 
-  it("should return a 400 when 'from' is not defined", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "", to: "Lausanne", page: "0", limit: "1" };
+  it("should return 422 if any input is whitespace", async () => {
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: " ",
+        to: "Lausanne",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
 
-    await handler(req, res);
+    await handler(request, response);
 
-    expect(res.statusCode).toBe(400);
+    expect(response.status).toHaveBeenCalledWith(422);
+    expect(response.json).toHaveBeenCalledWith({ error: "Invalid input" });
   });
 
-  it("should return a 400 when 'to' is not defined", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "", page: "0", limit: "1" };
+  it("should return 500 if there is an unknown error", async () => {
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
 
-    await handler(req, res);
+    (axios.get as jest.Mock).mockRejectedValue(new Error("Unknown error"));
 
-    expect(res.statusCode).toBe(400);
+    await handler(request, response);
+
+    expect(response.status).toHaveBeenCalledWith(500);
+    expect(response.json).toHaveBeenCalledWith({
+      error: "Something went wrong",
+    });
   });
 
-  it("should return a 400 when 'page' is not defined", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: "", limit: "1" };
+  it("should return the data if all parameters are passed", async () => {
+    const mockApiResponse = {
+      data: [{ from: "Wil", to: "Lausanne" }],
+    };
 
-    await handler(req, res);
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
 
-    expect(res.statusCode).toBe(400);
+    (axios.get as jest.Mock).mockResolvedValueOnce(mockApiResponse);
+
+    await handler(request, response);
+
+    expect(response.status).toHaveBeenCalledWith(200);
   });
 
-  it("should return a 400 when 'limit' is not defined", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: "0", limit: "" };
+  it("should return default values for page and limit if they are whitespace", async () => {
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: " ",
+        limit: " ",
+      },
+    } as unknown as NextApiRequest;
 
-    await handler(req, res);
+    await handler(request, response);
 
-    expect(res.statusCode).toBe(400);
-  });
-
-  it("should return a 400 when 'from' is not a string", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: [], to: "Lausanne", page: "0", limit: "1" };
-
-    await handler(req, res);
-
-    expect(res.statusCode).toBe(400);
-  });
-
-  it("should return a 400 when 'to' is not a string", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: [], page: "0", limit: "1" };
-
-    await handler(req, res);
-
-    expect(res.statusCode).toBe(400);
-  });
-
-  it("should return a 400 when 'page' is not a string", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: [], limit: "1" };
-
-    await handler(req, res);
-
-    expect(res.statusCode).toBe(400);
-  });
-
-  it("should return a 400 when 'limit' is not a string", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: "Lausanne", page: "0", limit: [] };
-
-    await handler(req, res);
-
-    expect(res.statusCode).toBe(400);
-  });
-
-  it("should return a 422 when 'from' is whitespace", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: " ", to: "Lausanne", page: "0", limit: "1" };
-
-    await handler(req, res);
-
-    expect(res.statusCode).toBe(422);
-  });
-
-  it("should return a 422 when 'to' is whitespace", async () => {
-    const { req, res } = mockCall();
-    req.query = { from: "Wil", to: " ", page: "0", limit: "1" };
-
-    await handler(req, res);
-
-    expect(res.statusCode).toBe(422);
+    expect(axios.get).toHaveBeenCalledWith(
+      `${process.env.API}/connections?from=Wil&to=Lausanne&page=0&limit=5`
+    );
   });
 });
