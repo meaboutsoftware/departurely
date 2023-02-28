@@ -6,7 +6,7 @@ import getSearchResults from "./connections-api";
 export default function Connections() {
   const router = useRouter();
   const [isInProgress, setIsInProgress] = useState(false);
-  const [loadedConnections, setLoadedConnections] = useState<any>([]);
+  const [loadedConnections, setLoadedConnections] = useState<unknown[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [error, setError] = useState(false);
   const { from, to } = router.query;
