@@ -27,7 +27,7 @@ export default function ConnectionList({
   connections: ConnectionListItem[];
 }) {
   return (
-    <div data-testid="items-list">
+    <div className="grid grid-cols-1 gap-10" data-testid="items-list">
       {connections &&
         connections.map((connection) => (
           <ConnectionItem
