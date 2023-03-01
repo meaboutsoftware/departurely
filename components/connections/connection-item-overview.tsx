@@ -26,7 +26,13 @@ export default function ConnectionItemOverview({
           className="basis-1/4 text-center"
           data-testid="item-overview-stopovers"
         >
-          {transfers}
+          <svg height="20" width="100%" viewBox="0 0 20 100%">
+            <circle cx="5" cy="15" r="5" fill="black" />
+            <line x1="0" y1="15" x2="98%" y2="15" stroke="black" />
+            <circle cx="98%" cy="15" r="5" fill="black" />
+          </svg>
+
+          Stops: {transfers}
         </div>
         <div
           className="basis-1/4 text-2xl text-center"
