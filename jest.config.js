@@ -23,6 +23,7 @@ const customJestConfig = {
     "@/(.*)$": "<rootDir>/$1",
   },
   testEnvironment: "jest-environment-jsdom",
+  testMatch: [ "**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(test).[jt]s?(x)" ]
 };
 
 // Execute tests in the same time zone, no matter if run locally or in a pipeline

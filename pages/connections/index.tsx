@@ -57,7 +57,10 @@ export default function Connections() {
           content="Look at timetable and routes. Do not forget to buy a ticket for a train"
         />
       </Head>
-      <h1 className="mt-10 mb-10 text-3xl text-center">
+      <h1
+        data-testid="connections-header"
+        className="mt-10 mb-10 text-3xl text-center"
+      >
         {from} {"->"} {to}
       </h1>
       {loadedConnections.length > 0 ? (
