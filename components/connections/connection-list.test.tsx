@@ -8,12 +8,10 @@ describe("ConnectionList", () => {
     duration: "00d03:42:00",
     from: {
       departure: "2012-03-31T08:58:00+02:00",
-      station: { name: "Wil" },
     },
     sections: [],
     to: {
       arrival: "2012-03-31T10:40:00+02:00",
-      station: { name: "Lausanne" },
     },
     transfers: 2,
   };
@@ -34,12 +32,10 @@ describe("ConnectionList", () => {
         duration: "00d02:22:00",
         from: {
           departure: "2012-03-31T09:58:00+02:00",
-          station: { name: "Heiden" },
         },
         sections: [],
         to: {
           arrival: "2012-03-31T12:20:00+02:00",
-          station: { name: "Wil" },
         },
         transfers: 0,
       },

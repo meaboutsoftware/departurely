@@ -3,30 +3,12 @@ import uuid from "react-uuid";
 import { ConnectionStopover } from "./connection-stopover";
 
 type ConnectionDetails = {
-  arrivalTime: string;
-  departureTime: string;
-  from: string;
   sections: ConnectionStopover[];
-  to: string;
 };
 
-export default function ConnectionItemDetails({
-  arrivalTime,
-  departureTime,
-  from,
-  sections,
-  to,
-}: ConnectionDetails) {
+export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
   return (
     <div data-testid="item-details">
-      <div data-testid="item-details-from">From: {from} </div>
-      <div data-testid="item-details-to">To: {to}</div>
-      <div data-testid="item-details-departure-time">
-        Departure time: {departureTime}
-      </div>
-      <div data-testid="item-details-arrival-time">
-        Arrival time: {arrivalTime}
-      </div>
       <table className="border-collapse w-full mt-4">
         <thead>
           <tr>

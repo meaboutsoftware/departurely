@@ -10,9 +10,7 @@ describe("ConnectionItem", () => {
         arrivalTime="09:46"
         departureTime="08:58"
         duration="00d11:42:00"
-        from="Wil"
         sections={[]}
-        to="Lausanne"
         transfers={2}
       />
     );

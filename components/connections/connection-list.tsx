@@ -7,16 +7,10 @@ export type ConnectionListItem = {
   duration: string;
   from: {
     departure: string;
-    station: {
-      name: string;
-    };
   };
   sections: ConnectionStopover[];
   to: {
     arrival: string;
-    station: {
-      name: string;
-    };
   };
   transfers: number;
 };
@@ -35,9 +29,7 @@ export default function ConnectionList({
             arrivalTime={connection.to.arrival}
             departureTime={connection.from.departure}
             duration={connection.duration}
-            from={connection.from.station.name}
             sections={connection.sections}
-            to={connection.to.station.name}
             transfers={connection.transfers}
           />
         ))}

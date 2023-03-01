@@ -30,16 +30,10 @@ describe("Connections", () => {
       duration: "00d01:00:00",
       from: {
         departure: "2012-03-31T08:58:00+02:00",
-        station: {
-          name: "Wil",
-        },
       },
       sections: [],
       to: {
         arrival: "2012-03-31T09:58:00+02:00",
-        station: {
-          name: "Lausanne",
-        },
       },
       transfers: 2,
     },
@@ -47,16 +41,10 @@ describe("Connections", () => {
       duration: "00d02:00:00",
       from: {
         departure: "2012-03-31T10:58:00+02:00",
-        station: {
-          name: "Zurich",
-        },
       },
       sections: [],
       to: {
         arrival: "2012-03-31T12:58:00+02:00",
-        station: {
-          name: "Heiden",
-        },
       },
       transfers: 3,
     },
@@ -86,17 +74,8 @@ describe("Connections", () => {
 
     render(<Connections />);
 
-    const firstConnectionFrom = await screen.findByText("From: Wil");
-    expect(firstConnectionFrom).toBeInTheDocument();
-
-    const firstConnectionTo = await screen.findByText("To: Lausanne");
-    expect(firstConnectionTo).toBeInTheDocument();
-
-    const secondConnectionFrom = await screen.findByText("From: Zurich");
-    expect(secondConnectionFrom).toBeInTheDocument();
-
-    const secondConnectionTo = await screen.findByText("To: Heiden");
-    expect(secondConnectionTo).toBeInTheDocument();
+    const connectionList = await screen.findByTestId("items-list");
+    expect(connectionList).toBeInTheDocument();
   });
 
   it("should render a 'Load more' button that calls the loadMoreConnectionsHandler function when clicked", async () => {
