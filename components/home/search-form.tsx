@@ -105,9 +105,14 @@ export default function SearchForm() {
           </div>
           <div>
             <button
-              className="w-full py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg"
+              className={`w-full py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg ${
+                fromError || toError
+                  ? "opacity-50 cursor-not-allowed"
+                  : "opacity-100 cursor-pointer"
+              }`}
               data-testid="search-form-submit"
               type="submit"
+              disabled={fromError || toError}
             >
               Search
             </button>
