@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import ConnectionItemOverview from "./connection-item-overview";
 
 describe("ConnectionItemOverview", () => {
-  it("renders all DOM elements when all values are defined", () => {
+  it("should render all DOM elements when all values are defined", () => {
     // Arrange
 
     // Act

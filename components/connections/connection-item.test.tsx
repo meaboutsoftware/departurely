@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import ConnectionItem from "./connection-item";
 
 describe("ConnectionItem", () => {
-  it("renders children components", () => {
+  it("should render children components", () => {
     // Arrange
 
     // Act

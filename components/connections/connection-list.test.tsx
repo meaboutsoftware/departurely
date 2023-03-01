@@ -16,7 +16,7 @@ describe("ConnectionList", () => {
     transfers: 2,
   };
 
-  it("renders single connection item when 1 connection is passed", () => {
+  it("should render single connection item when 1 connection is passed", () => {
     // Arrange
     const connections: ConnectionListItem[] = [testConnection];
 
@@ -29,7 +29,7 @@ describe("ConnectionList", () => {
     expect(items.length).toEqual(1);
   });
 
-  it("renders multiple connection items when multiple connections are passed", () => {
+  it("should render multiple connection items when multiple connections are passed", () => {
     // Arrange
     const connections: ConnectionListItem[] = [
       testConnection,

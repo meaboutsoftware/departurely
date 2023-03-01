@@ -5,7 +5,7 @@ import ConnectionItemDetails from "./connection-item-details";
 import { ConnectionStopover } from "./connection-stopover";
 
 describe("ConnectionItemDetails", () => {
-  it("renders table with values when there are stopovers", () => {
+  it("should render table with values when there are stopovers", () => {
     // Arrange
     const stopovers: ConnectionStopover[] = [
       {
@@ -99,7 +99,7 @@ describe("ConnectionItemDetails", () => {
     expect(itemTransportNumberValues.length).toEqual(2);
   });
 
-  it("renders empty table when there are no stopovers", () => {
+  it("should render empty table when there are no stopovers", () => {
     // Arrange
     const stopovers: ConnectionStopover[] = [];
 

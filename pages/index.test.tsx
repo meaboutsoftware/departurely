@@ -8,7 +8,7 @@ jest.mock("next/router", () => ({
 }));
 
 describe("Home", () => {
-  it("renders child component", () => {
+  it("should render child component", () => {
     // Arrange
 
     // Act
