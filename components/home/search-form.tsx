@@ -56,10 +56,10 @@ export default function SearchForm() {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-gray-500"
+      className="flex items-center justify-center min-h-screen"
       data-testid="search-form"
     >
-      <div className="px-8 py-6 mt-4 text-left bg-gray-300 shadow-lg border rounded-md">
+      <div className="px-8 py-6 mt-4 w-1/2 text-left bg-gray-300 shadow-lg border rounded-md">
         <h3 className="text-2xl text-center">Find train connections</h3>
         <form onSubmit={searchHandler}>
           <div className="mt-4">
