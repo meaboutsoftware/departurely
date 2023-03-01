@@ -1,6 +1,7 @@
 import React from "react";
 import uuid from "react-uuid";
 import { ConnectionStopover } from "./connection-stopover";
+import { formatTime } from "./time-formatter";
 
 type ConnectionDetails = {
   sections: ConnectionStopover[];
@@ -19,10 +20,16 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
               Departure
             </th>
             <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
+              At
+            </th>
+            <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
               Track
             </th>
             <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
               Arrival
+            </th>
+            <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
+              At
             </th>
             <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
               Track
@@ -30,6 +37,11 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
           </tr>
         </thead>
         {sections.map((section) => {
+          const formattedArrivalTime = formatTime(section.arrival.arrival);
+          const formattedDepartureTime = formatTime(
+            section.departure.departure
+          );
+
           return (
             section.journey && (
               <tbody>
@@ -44,10 +56,16 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
                     {section.departure.station.name}
                   </td>
                   <td className="py-2 px-4 text-center bg-gray-200">
+                    {formattedDepartureTime}
+                  </td>
+                  <td className="py-2 px-4 text-center bg-gray-200">
                     {section.departure.platform}
                   </td>
                   <td className="py-2 px-4 text-center bg-gray-200">
-                    {section.arrival.station.name}
+                    {section.arrival.station.name} {formattedArrivalTime}
+                  </td>
+                  <td className="py-2 px-4 text-center bg-gray-200">
+                    {formattedArrivalTime}
                   </td>
                   <td className="py-2 px-4 text-center bg-gray-200">
                     {section.arrival.platform}
