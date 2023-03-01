@@ -26,8 +26,8 @@ export default function ConnectionList({
         connections.map((connection) => (
           <ConnectionItem
             key={uuid()}
-            arrivalTime={connection.to.arrival}
-            departureTime={connection.from.departure}
+            arrivalTime={connection.to?.arrival}
+            departureTime={connection.from?.departure}
             duration={connection.duration}
             sections={connection.sections}
             transfers={connection.transfers}
