@@ -51,7 +51,7 @@ export default function Connections() {
 
   return (
     <section>
-      <h1>
+      <h1 className="mt-10 mb-10 text-3xl text-center">
         {from} {"->"} {to}
       </h1>
       <ConnectionList connections={loadedConnections} />
