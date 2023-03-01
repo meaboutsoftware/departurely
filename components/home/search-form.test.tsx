@@ -8,7 +8,7 @@ jest.mock("next/router", () => ({
 }));
 
 describe("SearchForm", () => {
-  it("renders all DOM elements when all values are defined", () => {
+  it("should render all DOM elements when all values are defined", () => {
     // Arrange
 
     // Act
@@ -49,6 +49,7 @@ describe("SearchForm", () => {
   });
 
   it("should call router.push when form is submitted", () => {
+    // Arrange
     const pushMock = jest.fn();
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires, unicorn/prefer-module
     const useRouterMock = jest.spyOn(require("next/router"), "useRouter");
@@ -56,6 +57,7 @@ describe("SearchForm", () => {
       push: pushMock,
     }));
 
+    // Act
     render(<SearchForm />);
     const fromInput = screen.getByTestId("search-form-from");
     const toInput = screen.getByTestId("search-form-to");
@@ -65,8 +67,39 @@ describe("SearchForm", () => {
     fireEvent.change(toInput, { target: { value: "Lausanne" } });
     fireEvent.click(submitButton);
 
+    // Assert
     expect(pushMock).toHaveBeenCalledTimes(1);
 
     useRouterMock.mockRestore();
+  });
+
+  it("should display an error message when 'from' input is invalid", () => {
+    // Arrange
+
+    // Act
+    render(<SearchForm />);
+    const fromInput = screen.getByTestId("search-form-from");
+    fireEvent.change(fromInput, { target: { value: "12" } });
+    fireEvent.submit(screen.getByTestId("search-form"));
+
+    // Assert
+    expect(
+      screen.getByText("Please enter a valid From location")
+    ).toBeInTheDocument();
+  });
+
+  it("should display an error message when 'to' input is invalid", () => {
+    // Arrange
+
+    // Act
+    render(<SearchForm />);
+    const toInput = screen.getByTestId("search-form-to");
+    fireEvent.change(toInput, { target: { value: "123" } });
+    fireEvent.submit(screen.getByTestId("search-form"));
+
+    // Assert
+    expect(
+      screen.getByText("Please enter a valid To location")
+    ).toBeInTheDocument();
   });
 });

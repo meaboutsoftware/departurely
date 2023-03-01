@@ -1,24 +1,59 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
+const inputFieldRegex = /^[A-Za-z]+$/;
+function hasWhitespace(input: string) {
+  return /\s/g.test(input);
+}
+
+function isValidated(input: string) {
+  if (
+    inputFieldRegex.test(input) ||
+    !input ||
+    input === "" ||
+    hasWhitespace(input)
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
 export default function SearchForm() {
   const router = useRouter();
 
   const [from, setFrom] = useState("");
+  const [fromError, setFromError] = useState(false);
+
   const [to, setTo] = useState("");
+  const [toError, setToError] = useState(false);
 
   const onFromChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+
+    if (isValidated(input)) {
+      setFromError(false);
+    } else {
+      setFromError(true);
+    }
+
     setFrom(event.target.value);
   };
 
   const onToChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+
+    if (isValidated(input)) {
+      setToError(false);
+    } else {
+      setToError(true);
+    }
+
     setTo(event.target.value);
   };
 
   const searchHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // I ommitted form validation here - it valdiates with HTML and on the server side
 
     router.push({
       pathname: "/connections",
@@ -45,6 +80,11 @@ export default function SearchForm() {
                 onChange={onFromChange}
                 required
               />
+              {fromError && (
+                <div className="text-red-500 text-sm mt-2">
+                  Please enter a valid From location
+                </div>
+              )}
             </div>
             <div className="mt-4">
               <input
@@ -56,6 +96,11 @@ export default function SearchForm() {
                 onChange={onToChange}
                 required
               />
+              {toError && (
+                <div className="text-red-500 text-sm mt-2">
+                  Please enter a valid To location
+                </div>
+              )}
             </div>
           </div>
           <div>
