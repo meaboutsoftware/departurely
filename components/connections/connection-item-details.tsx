@@ -1,7 +1,7 @@
 import React from "react";
 import uuid from "react-uuid";
+import { formatTime } from "@/utils/time-formatter";
 import { ConnectionStopover } from "./connection-stopover";
-import { formatTime } from "./time-formatter";
 
 type ConnectionDetails = {
   sections: ConnectionStopover[];

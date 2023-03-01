@@ -1,8 +1,8 @@
 import React from "react";
+import { formatDuration, formatTime } from "@/utils/time-formatter";
 import ConnectionItemDetails from "./connection-item-details";
 import ConnectionItemOverview from "./connection-item-overview";
 import { ConnectionStopover } from "./connection-stopover";
-import { formatDuration, formatTime } from "./time-formatter";
 
 type Connection = {
   arrivalTime: string;
