@@ -63,8 +63,8 @@ describe("SearchForm", () => {
     const toInput = screen.getByTestId("search-form-to");
     const submitButton = screen.getByTestId("search-form-submit");
 
-    fireEvent.change(fromInput, { target: { value: "Wil" } });
-    fireEvent.change(toInput, { target: { value: "Lausanne" } });
+    fireEvent.change(fromInput, { target: { value: "Zürich" } });
+    fireEvent.change(toInput, { target: { value: "Genève" } });
     fireEvent.click(submitButton);
 
     // Assert
