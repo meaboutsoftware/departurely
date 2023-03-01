@@ -36,15 +36,15 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
             </th>
           </tr>
         </thead>
-        {sections.map((section) => {
-          const formattedArrivalTime = formatTime(section.arrival.arrival);
-          const formattedDepartureTime = formatTime(
-            section.departure.departure
-          );
+        <tbody>
+          {sections.map((section) => {
+            const formattedArrivalTime = formatTime(section.arrival.arrival);
+            const formattedDepartureTime = formatTime(
+              section.departure.departure
+            );
 
-          return (
-            section.journey && (
-              <tbody>
+            return (
+              section.journey && (
                 <tr
                   key={uuid()}
                   className="border-b border-gray-200 hover:bg-gray-100"
@@ -71,10 +71,10 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
                     {section.arrival.platform}
                   </td>
                 </tr>
-              </tbody>
-            )
-          );
-        })}
+              )
+            );
+          })}
+        </tbody>
       </table>
       <br />
     </div>
