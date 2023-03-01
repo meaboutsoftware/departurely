@@ -25,6 +25,8 @@
     "plugin:testing-library/react",
     // NextJS rules,
     "plugin:@next/next/recommended",
+    // Storybook rules,
+    "plugin:storybook/recommended",
     // Overrides some ESLint rules that conflict with Prettier,
     "prettier",
     // Enables eslint-plugin-prettier and eslint-config-prettier.,
