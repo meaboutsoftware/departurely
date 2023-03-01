@@ -1,22 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const inputFieldRegex = /^[A-Za-zÀ-ÿ]+$/u;
-function hasWhitespace(input: string) {
-  return /\s/g.test(input);
+const inputFieldRegex = /^[A-Za-zÀ-ÿ ]+$/u;
+function hasOnlyWhitespaces(input: string) {
+  return input.trim() === "";
 }
 
-function isValidated(input: string) {
-  if (
-    inputFieldRegex.test(input) ||
-    !input ||
-    input === "" ||
-    hasWhitespace(input)
-  ) {
-    return true;
-  }
-
-  return false;
+function isInputValid(input: string) {
+  return (
+    inputFieldRegex.test(input) && input !== "" && !hasOnlyWhitespaces(input)
+  );
 }
 
 export default function SearchForm() {
@@ -31,7 +24,7 @@ export default function SearchForm() {
   const onFromChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
 
-    if (isValidated(input)) {
+    if (isInputValid(input)) {
       setFromError(false);
     } else {
       setFromError(true);
@@ -43,7 +36,7 @@ export default function SearchForm() {
   const onToChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
 
-    if (isValidated(input)) {
+    if (isInputValid(input)) {
       setToError(false);
     } else {
       setToError(true);

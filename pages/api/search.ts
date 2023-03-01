@@ -4,6 +4,18 @@ import axios, { AxiosResponse } from "axios";
 const DEFAULT_PAGE = "0";
 const DEFAULT_LIMIT = "5";
 
+function hasOnlyWhitespaces(input: string) {
+  return input.trim() === "";
+}
+
+function isLocationParameterValid(parameter: string) {
+  return /^[A-Za-zÀ-ÿ ]+$/u.test(parameter) && !hasOnlyWhitespaces(parameter);
+}
+
+function isPagingParameterValid(parameter: string) {
+  return /^\d+$/.test(parameter) && !hasOnlyWhitespaces(parameter);
+}
+
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
@@ -32,13 +44,13 @@ export default async function handler(
     return;
   }
 
-  if (from.trim() === "" || to.trim() === "") {
+  if (!isLocationParameterValid(from) || !isLocationParameterValid(to)) {
     response.status(422).json({ error: "Invalid input" });
 
     return;
   }
 
-  if (page.trim() === "" || limit.trim() === "") {
+  if (!isPagingParameterValid(page) || !isPagingParameterValid(limit)) {
     page = DEFAULT_PAGE;
     limit = DEFAULT_LIMIT;
   }
