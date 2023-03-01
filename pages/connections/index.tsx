@@ -55,13 +55,16 @@ export default function Connections() {
       {loadedConnections.length > 0 ? (
         <>
           <ConnectionList connections={loadedConnections} />
-          <button
-            data-testid="load-more"
-            type="button"
-            onClick={loadMoreConnectionsHandler}
-          >
-            Load more
-          </button>
+          <div className="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
+            <button
+              className="w-3/5 px-20 py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg"
+              data-testid="load-more"
+              type="button"
+              onClick={loadMoreConnectionsHandler}
+            >
+              Load more
+            </button>
+          </div>
         </>
       ) : (
         <NoResults />
