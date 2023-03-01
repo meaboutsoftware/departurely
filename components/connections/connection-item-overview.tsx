@@ -15,15 +15,31 @@ export default function ConnectionItemOverview({
 }: ConnectionOverview) {
   return (
     <div data-testid="item-overview">
-      <div data-testid="item-overview-departure-time">
-        Departure time: {departureTime}
-      </div>
-      <div data-testid="item-overview-arrival-time">
-        Arrival time: {arrivalTime}
-      </div>
-      <div data-testid="item-overview-duration">Duration: {duration}</div>
-      <div data-testid="item-overview-stopovers">
-        Number of stopovers: {transfers}
+      <div className="flex flex-row">
+        <div
+          className="basis-1/4 text-2xl text-center"
+          data-testid="item-overview-departure-time"
+        >
+          {departureTime}
+        </div>
+        <div
+          className="basis-1/4 text-center"
+          data-testid="item-overview-stopovers"
+        >
+          {transfers}
+        </div>
+        <div
+          className="basis-1/4 text-2xl text-center"
+          data-testid="item-overview-arrival-time"
+        >
+          {arrivalTime}
+        </div>
+        <div
+          className="basis-1/4 text-center"
+          data-testid="item-overview-duration"
+        >
+          Duration: {duration}
+        </div>
       </div>
       <br />
     </div>
