@@ -1,4 +1,6 @@
-import ConnectionList from "@/components/connections/connection-list";
+import ConnectionList, {
+  ConnectionListItem,
+} from "@/components/connections/connection-list";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import getSearchResults from "./api";
@@ -6,7 +8,9 @@ import getSearchResults from "./api";
 export default function Connections() {
   const router = useRouter();
   const [isInProgress, setIsInProgress] = useState(false);
-  const [loadedConnections, setLoadedConnections] = useState<unknown[]>([]);
+  const [loadedConnections, setLoadedConnections] = useState<
+    ConnectionListItem[]
+  >([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [error, setError] = useState(false);
   const { from, to } = router.query;
