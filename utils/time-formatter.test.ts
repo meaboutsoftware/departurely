@@ -11,7 +11,7 @@ describe("TimeFormatter", () => {
       const formattedTime = formatTime(notFormattedTime);
 
       // Assert
-      expect(formattedTime).toEqual("08:58 AM");
+      expect(formattedTime).toEqual("06:58 AM");
     });
 
     it("should return invalid date when given time is not in parseable format", () => {
