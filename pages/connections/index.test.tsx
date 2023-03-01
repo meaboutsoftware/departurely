@@ -2,10 +2,10 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { useRouter } from "next/router";
-import getSearchResults from "./connections-api";
+import getSearchResults from "./api";
 import Connections from ".";
 
-jest.mock("./connections-api");
+jest.mock("./api");
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),
 }));

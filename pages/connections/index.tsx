@@ -1,7 +1,7 @@
 import ConnectionList from "@/components/connections/connection-list";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import getSearchResults from "./connections-api";
+import getSearchResults from "./api";
 
 export default function Connections() {
   const router = useRouter();
