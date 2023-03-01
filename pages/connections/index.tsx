@@ -3,9 +3,9 @@ import ConnectionList, {
 } from "@/components/connections/connection-list";
 import NoResults from "@/components/ui/no-results";
 import Spinner from "@/components/ui/spinner";
+import getSearchResults from "@/utils/api";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import getSearchResults from "./api";
 
 export default function Connections() {
   const router = useRouter();
