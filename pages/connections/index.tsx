@@ -4,6 +4,7 @@ import ConnectionList, {
 import NoResults from "@/components/ui/no-results";
 import Spinner from "@/components/ui/spinner";
 import getSearchResults from "@/utils/api";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -48,7 +49,14 @@ export default function Connections() {
   }
 
   return (
-    <section>
+    <>
+      <Head>
+        <title>Your Connections In Switzerland</title>
+        <meta
+          name="description"
+          content="Look at timetable and routes. Do not forget to buy a ticket for a train"
+        />
+      </Head>
       <h1 className="mt-10 mb-10 text-3xl text-center">
         {from} {"->"} {to}
       </h1>
@@ -69,6 +77,6 @@ export default function Connections() {
       ) : (
         <NoResults />
       )}
-    </section>
+    </>
   );
 }

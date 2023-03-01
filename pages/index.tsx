@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Departurely</title>
+        <title>Switzerland Train Connections Schedule</title>
         <meta
           name="description"
-          content="Your new way to find connections between trains in Switzerland"
+          content="Find the fastest train connections in Switzerland. Plan your trip with ease using our Switzerland train connections schedule."
         />
       </Head>
       <SearchForm />
