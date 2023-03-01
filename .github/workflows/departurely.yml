@@ -1,5 +1,8 @@
-name: Continuous Integration
-on: push
+name: Continuous Integration for departurely
+on:
+  push:
+    branches:
+      - master
 jobs:
   lint:
     name: Lint
