@@ -73,13 +73,15 @@ describe("SearchForm", () => {
     useRouterMock.mockRestore();
   });
 
+  const invalidValue = "123";
+
   it("should display an error message when 'from' input is invalid", () => {
     // Arrange
 
     // Act
     render(<SearchForm />);
     const fromInput = screen.getByTestId("search-form-from");
-    fireEvent.change(fromInput, { target: { value: "12" } });
+    fireEvent.change(fromInput, { target: { value: invalidValue } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
@@ -94,7 +96,7 @@ describe("SearchForm", () => {
     // Act
     render(<SearchForm />);
     const toInput = screen.getByTestId("search-form-to");
-    fireEvent.change(toInput, { target: { value: "123" } });
+    fireEvent.change(toInput, { target: { value: invalidValue } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
