@@ -1,6 +1,7 @@
 import ConnectionList, {
   ConnectionListItem,
 } from "@/components/connections/connection-list";
+import Spinner from "@/components/ui/spinner";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import getSearchResults from "./api";
@@ -46,11 +47,7 @@ export default function Connections() {
   }
 
   if (isInProgress) {
-    return (
-      <section>
-        <p>Loading...</p>;
-      </section>
-    );
+    return <Spinner />;
   }
 
   return (

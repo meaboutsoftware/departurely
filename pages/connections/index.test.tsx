@@ -58,7 +58,7 @@ describe("Connections", () => {
     render(<Connections />);
 
     // Assert
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
+    expect(screen.getByTestId("spinner")).toBeInTheDocument();
   });
 
   it("should render a loading message when connections fail to load", async () => {
