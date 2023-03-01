@@ -50,7 +50,7 @@ describe("Connections", () => {
     },
   ];
 
-  it("should render a loading message when connections are being loaded", () => {
+  it("should render a spinner component when connections are being loaded", () => {
     // Arrange
     (getSearchResults as jest.Mock).mockResolvedValue({ connections: [] });
 
@@ -61,7 +61,7 @@ describe("Connections", () => {
     expect(screen.getByTestId("spinner")).toBeInTheDocument();
   });
 
-  it("should render a loading message when connections fail to load", async () => {
+  it("should render a no results component when connections fail to load", async () => {
     // Arrange
     (getSearchResults as jest.Mock).mockImplementation(() =>
       // eslint-disable-next-line prefer-promise-reject-errors
@@ -72,9 +72,7 @@ describe("Connections", () => {
     render(<Connections />);
 
     // Assert
-    expect(
-      await screen.findByText("It was not possible to load connections...")
-    ).toBeInTheDocument();
+    expect(await screen.findByTestId("no-results")).toBeInTheDocument();
   });
 
   it("should render a list of connections when they are loaded", async () => {
