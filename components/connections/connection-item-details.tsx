@@ -9,7 +9,7 @@ type ConnectionDetails = {
 
 export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
   return (
-    <div data-testid="item-details">
+    <div data-testid="item-details" className="overflow-x-auto">
       <table className="border-collapse w-full mt-4">
         <thead>
           <tr>
