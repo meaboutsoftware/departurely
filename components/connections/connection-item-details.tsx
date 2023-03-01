@@ -14,9 +14,6 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
         <thead>
           <tr>
             <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
-              Transport number
-            </th>
-            <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
               Departure
             </th>
             <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
@@ -34,6 +31,9 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
             <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
               Track
             </th>
+            <th className="btext-left py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border-b border-gray-200">
+              Transport number
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -49,9 +49,6 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
                   key={uuid()}
                   className="border-b border-gray-200 hover:bg-gray-100"
                 >
-                  <td className="py-2 px-4 text-center bg-gray-200">
-                    {section.journey.category} {section.journey.number}
-                  </td>
                   <td className="py-2 px-4 text-center bg-gray-200">
                     {section.departure.station.name}
                   </td>
@@ -69,6 +66,9 @@ export default function ConnectionItemDetails({ sections }: ConnectionDetails) {
                   </td>
                   <td className="py-2 px-4 text-center bg-gray-200">
                     {section.arrival.platform}
+                  </td>
+                  <td className="py-2 px-4 text-center bg-gray-200">
+                    {section.journey.category} {section.journey.number}
                   </td>
                 </tr>
               )
