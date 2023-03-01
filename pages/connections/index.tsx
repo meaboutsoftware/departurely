@@ -1,6 +1,7 @@
 import ConnectionList, {
   ConnectionListItem,
 } from "@/components/connections/connection-list";
+import NoResults from "@/components/ui/no-results";
 import Spinner from "@/components/ui/spinner";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -39,11 +40,7 @@ export default function Connections() {
   }, [router.isReady, currentPage]);
 
   if (error) {
-    return (
-      <section>
-        <p>It was not possible to load connections...</p>;
-      </section>
-    );
+    return <NoResults />;
   }
 
   if (isInProgress) {
@@ -55,14 +52,20 @@ export default function Connections() {
       <h1 className="mt-10 mb-10 text-3xl text-center">
         {from} {"->"} {to}
       </h1>
-      <ConnectionList connections={loadedConnections} />
-      <button
-        data-testid="load-more"
-        type="button"
-        onClick={loadMoreConnectionsHandler}
-      >
-        Load more
-      </button>
+      {loadedConnections.length > 0 ? (
+        <>
+          <ConnectionList connections={loadedConnections} />
+          <button
+            data-testid="load-more"
+            type="button"
+            onClick={loadMoreConnectionsHandler}
+          >
+            Load more
+          </button>
+        </>
+      ) : (
+        <NoResults />
+      )}
     </section>
   );
 }
