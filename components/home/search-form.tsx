@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const inputFieldRegex = /^[A-Za-z]+$/;
+const inputFieldRegex = /^[A-Za-zÀ-ÿ]+$/u;
 function hasWhitespace(input: string) {
   return /\s/g.test(input);
 }
