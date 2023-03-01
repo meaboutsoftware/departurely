@@ -1,5 +1,5 @@
 export function formatTime(time: string): string {
-  return new Date(time).toLocaleTimeString([], {
+  return new Date(time).toLocaleTimeString("de", {
     hour: "2-digit",
     minute: "2-digit",
   });
