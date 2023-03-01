@@ -1,3 +1,7 @@
 # Departurely
 
-Your new way to find connections between trains in Switzerland
+IMPORTANT: This is a hobby project. Should not be used for commercial purpose.
+
+The application allows to look for public transport connections between 2 stations in Switzerland. Trains and buses are taken into consideration.
+
+Project uses https://transport.opendata.ch/v1/[transport API] delivered by https://opendata.ch/
