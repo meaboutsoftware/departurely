@@ -22,6 +22,7 @@ describe("handler function", () => {
   });
 
   it("should return 400 if any required query parameter is missing", async () => {
+    // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
@@ -31,13 +32,16 @@ describe("handler function", () => {
       },
     } as unknown as NextApiRequest;
 
+    // Act
     await handler(request, response);
 
+    // Assert
     expect(response.status).toHaveBeenCalledWith(400);
     expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
   });
 
   it("should return 400 if any input is empty", async () => {
+    // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
@@ -48,19 +52,24 @@ describe("handler function", () => {
       },
     } as unknown as NextApiRequest;
 
+    // Act
     await handler(request, response);
 
+    // Assert
     expect(response.status).toHaveBeenCalledWith(400);
     expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
   });
 
   it("should return 405 if HTTP method is not GET", async () => {
+    // Arrange
     const request: NextApiRequest = {
       method: "POST",
     } as unknown as NextApiRequest;
 
+    // Act
     await handler(request, response);
 
+    // Assert
     expect(response.status).toHaveBeenCalledWith(405);
     expect(response.json).toHaveBeenCalledWith({
       error: "Method not allowed.",
@@ -68,6 +77,7 @@ describe("handler function", () => {
   });
 
   it("should return 422 if any input is whitespace", async () => {
+    // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
@@ -78,13 +88,16 @@ describe("handler function", () => {
       },
     } as unknown as NextApiRequest;
 
+    // Act
     await handler(request, response);
 
+    // Assert
     expect(response.status).toHaveBeenCalledWith(422);
     expect(response.json).toHaveBeenCalledWith({ error: "Invalid input" });
   });
 
   it("should return 500 if there is an unknown error", async () => {
+    // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
@@ -97,8 +110,10 @@ describe("handler function", () => {
 
     (axios.get as jest.Mock).mockRejectedValue(new Error("Unknown error"));
 
+    // Act
     await handler(request, response);
 
+    // Assert
     expect(response.status).toHaveBeenCalledWith(500);
     expect(response.json).toHaveBeenCalledWith({
       error: "Something went wrong",
@@ -106,6 +121,7 @@ describe("handler function", () => {
   });
 
   it("should return the data if all parameters are passed", async () => {
+    // Arrange
     const mockApiResponse = {
       data: [{ from: "Wil", to: "Lausanne" }],
     };
@@ -122,12 +138,15 @@ describe("handler function", () => {
 
     (axios.get as jest.Mock).mockResolvedValueOnce(mockApiResponse);
 
+    // Act
     await handler(request, response);
 
+    // Assert
     expect(response.status).toHaveBeenCalledWith(200);
   });
 
   it("should return default values for page and limit if they are whitespace", async () => {
+    // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
@@ -138,8 +157,10 @@ describe("handler function", () => {
       },
     } as unknown as NextApiRequest;
 
+    // Act
     await handler(request, response);
 
+    // Assert
     expect(axios.get).toHaveBeenCalledWith(
       `${process.env.API}/connections?from=Wil&to=Lausanne&page=0&limit=5`
     );

@@ -5,6 +5,9 @@ import ConnectionItem from "./connection-item";
 
 describe("ConnectionItem", () => {
   it("renders children components", () => {
+    // Arrange
+
+    // Act
     render(
       <ConnectionItem
         arrivalTime="09:46"
@@ -15,6 +18,7 @@ describe("ConnectionItem", () => {
       />
     );
 
+    // Assert
     const itemDetails = screen.getByTestId("item-details");
     const itemOverview = screen.getByTestId("item-overview");
 

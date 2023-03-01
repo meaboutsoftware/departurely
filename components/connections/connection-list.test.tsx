@@ -17,15 +17,20 @@ describe("ConnectionList", () => {
   };
 
   it("renders single connection item when 1 connection is passed", () => {
+    // Arrange
     const connections: ConnectionListItem[] = [testConnection];
+
+    // Act
     render(<ConnectionList connections={connections} />);
 
+    // Assert
     const items = screen.getAllByTestId("item");
 
     expect(items.length).toEqual(1);
   });
 
   it("renders multiple connection items when multiple connections are passed", () => {
+    // Arrange
     const connections: ConnectionListItem[] = [
       testConnection,
       {
@@ -40,8 +45,11 @@ describe("ConnectionList", () => {
         transfers: 0,
       },
     ];
+
+    // Act
     render(<ConnectionList connections={connections} />);
 
+    // Assert
     const items = screen.getAllByTestId("item");
 
     expect(items.length).toEqual(2);

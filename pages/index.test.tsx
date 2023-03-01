@@ -9,8 +9,12 @@ jest.mock("next/router", () => ({
 
 describe("Home", () => {
   it("renders child component", () => {
+    // Arrange
+
+    // Act
     render(<Home />);
 
+    // Assert
     const searchForm = screen.getByTestId("search-form");
 
     expect(searchForm).toBeInTheDocument();

@@ -51,43 +51,57 @@ describe("Connections", () => {
   ];
 
   it("should render a loading message when connections are being loaded", () => {
+    // Arrange
     (getSearchResults as jest.Mock).mockResolvedValue({ connections: [] });
+
+    // Act
     render(<Connections />);
+
+    // Assert
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
 
   it("should render a loading message when connections fail to load", async () => {
+    // Arrange
     (getSearchResults as jest.Mock).mockImplementation(() =>
       // eslint-disable-next-line prefer-promise-reject-errors
       Promise.reject("error")
     );
 
+    // Act
     render(<Connections />);
 
+    // Assert
     expect(
       await screen.findByText("It was not possible to load connections...")
     ).toBeInTheDocument();
   });
 
   it("should render a list of connections when they are loaded", async () => {
+    // Arrange
     (getSearchResults as jest.Mock).mockResolvedValue({ connections });
 
+    // Act
     render(<Connections />);
 
+    // Assert
     const connectionList = await screen.findByTestId("items-list");
     expect(connectionList).toBeInTheDocument();
   });
 
   it("should render a 'Load more' button that calls the loadMoreConnectionsHandler function when clicked", async () => {
+    // Arrange
     const getSearchResultsMock = getSearchResults as jest.Mock;
     (getSearchResultsMock as jest.Mock).mockResolvedValue({ connections });
 
+    // Act
     render(<Connections />);
 
     getSearchResultsMock.mockResolvedValue({ connections: [] });
     const button = await screen.findByTestId("load-more");
     button.click();
 
+    // Assert
     await waitFor(() => expect(getSearchResults).toHaveBeenCalledTimes(2));
   });
 });

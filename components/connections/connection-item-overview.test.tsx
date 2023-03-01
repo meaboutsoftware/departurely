@@ -5,6 +5,9 @@ import ConnectionItemOverview from "./connection-item-overview";
 
 describe("ConnectionItemOverview", () => {
   it("renders all DOM elements when all values are defined", () => {
+    // Arrange
+
+    // Act
     render(
       <ConnectionItemOverview
         arrivalTime="09:46"
@@ -14,6 +17,7 @@ describe("ConnectionItemOverview", () => {
       />
     );
 
+    // Assert
     const itemOverview = screen.getByTestId("item-overview");
     const arrivalTime = screen.getByTestId("item-overview-departure-time");
     const departureTime = screen.getByTestId("item-overview-arrival-time");
