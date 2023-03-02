@@ -273,13 +273,33 @@ describe("handler function", () => {
     expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
   });
 
-  it("should return 422 when any input is whitespace", async () => {
+  it("should return 422 when from input is whitespace", async () => {
     // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
         from: " ",
         to: "Lausanne",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(422);
+    expect(response.json).toHaveBeenCalledWith({ error: "Invalid input" });
+  });
+
+  it("should return 422 when to input is whitespace", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: " ",
         page: "0",
         limit: "5",
       },
