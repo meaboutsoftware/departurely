@@ -63,7 +63,7 @@ describe("SearchForm", () => {
     const toInput = screen.getByTestId("search-form-to");
     const submitButton = screen.getByTestId("search-form-submit");
 
-    fireEvent.change(fromInput, { target: { value: "Zürich" } });
+    fireEvent.change(fromInput, { target: { value: "Zürich HB" } });
     fireEvent.change(toInput, { target: { value: "Genève" } });
     fireEvent.click(submitButton);
 
@@ -73,15 +73,13 @@ describe("SearchForm", () => {
     useRouterMock.mockRestore();
   });
 
-  const invalidValue = "123";
-
-  it("should display an error message when 'from' input is invalid", () => {
+  it("should display an error message when 'from' input contains numbers", () => {
     // Arrange
 
     // Act
     render(<SearchForm />);
     const fromInput = screen.getByTestId("search-form-from");
-    fireEvent.change(fromInput, { target: { value: invalidValue } });
+    fireEvent.change(fromInput, { target: { value: "Wil1" } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
@@ -90,13 +88,73 @@ describe("SearchForm", () => {
     ).toBeInTheDocument();
   });
 
-  it("should display an error message when 'to' input is invalid", () => {
+  it("should display an error message when 'from' input contains special characters", () => {
+    // Arrange
+
+    // Act
+    render(<SearchForm />);
+    const fromInput = screen.getByTestId("search-form-from");
+    fireEvent.change(fromInput, { target: { value: "Wil!" } });
+    fireEvent.submit(screen.getByTestId("search-form"));
+
+    // Assert
+    expect(
+      screen.getByText("Please enter a valid From location")
+    ).toBeInTheDocument();
+  });
+
+  it("should display an error message when 'from' input contains whitespace only", () => {
+    // Arrange
+
+    // Act
+    render(<SearchForm />);
+    const fromInput = screen.getByTestId("search-form-from");
+    fireEvent.change(fromInput, { target: { value: " " } });
+    fireEvent.submit(screen.getByTestId("search-form"));
+
+    // Assert
+    expect(
+      screen.getByText("Please enter a valid From location")
+    ).toBeInTheDocument();
+  });
+
+  it("should display an error message when 'to' input contains numbers", () => {
     // Arrange
 
     // Act
     render(<SearchForm />);
     const toInput = screen.getByTestId("search-form-to");
-    fireEvent.change(toInput, { target: { value: invalidValue } });
+    fireEvent.change(toInput, { target: { value: "Wil1" } });
+    fireEvent.submit(screen.getByTestId("search-form"));
+
+    // Assert
+    expect(
+      screen.getByText("Please enter a valid To location")
+    ).toBeInTheDocument();
+  });
+
+  it("should display an error message when 'to' input contains special characters", () => {
+    // Arrange
+
+    // Act
+    render(<SearchForm />);
+    const toInput = screen.getByTestId("search-form-to");
+    fireEvent.change(toInput, { target: { value: "Wil!" } });
+    fireEvent.submit(screen.getByTestId("search-form"));
+
+    // Assert
+    expect(
+      screen.getByText("Please enter a valid To location")
+    ).toBeInTheDocument();
+  });
+
+  it("should display an error message when 'to' input contains whitespace only", () => {
+    // Arrange
+
+    // Act
+    render(<SearchForm />);
+    const toInput = screen.getByTestId("search-form-to");
+    fireEvent.change(toInput, { target: { value: " " } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
