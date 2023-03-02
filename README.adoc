@@ -5,3 +5,14 @@ IMPORTANT: This is a hobby project. Should not be used for commercial purpose.
 The application allows to look for public transport connections between 2 stations in Switzerland. Trains and buses are taken into consideration.
 
 Project uses https://transport.opendata.ch/v1/[transport API] delivered by https://opendata.ch/
+
+## Technology stack
+
+What can you find in this project?
+
+* Code written in React with Next.js and Typescript
+* Usage of API Routes from Next.js to make API calls
+* Unit tests written with Jest
+* End-to-end tests written with Playwright
+* CI/CD pipeline in GitHub Actions
+* Deployment to Vercel
