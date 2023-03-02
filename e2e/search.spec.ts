@@ -2,15 +2,14 @@
 import { test, expect } from "@playwright/test";
 
 test("should navigate to the search page", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
-
+  await page.goto("");
   await expect(page.getByTestId("search-form")).toBeVisible();
 });
 
 test("should show connections when cities without special characters", async ({
   page,
 }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("");
 
   await page.getByTestId("search-form-from").fill("Wil");
   await page.getByTestId("search-form-to").fill("Lausanne");
@@ -25,7 +24,7 @@ test("should show connections when cities without special characters", async ({
 test("should show connections when cities with special characters", async ({
   page,
 }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("");
 
   await page.getByTestId("search-form-from").fill("Zürich");
   await page.getByTestId("search-form-to").fill("Genève");
@@ -38,7 +37,7 @@ test("should show connections when cities with special characters", async ({
 });
 
 test("should show connections when cities with spaces", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("");
 
   await page.getByTestId("search-form-from").fill("Zürich HB");
   await page.getByTestId("search-form-to").fill("Wil SG");
@@ -51,7 +50,7 @@ test("should show connections when cities with spaces", async ({ page }) => {
 });
 
 test("should show no results when no connections exist", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
+  await page.goto("");
 
   await page.getByTestId("search-form-from").fill("W");
   await page.getByTestId("search-form-to").fill("W");
