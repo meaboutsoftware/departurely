@@ -1,16 +1,10 @@
+import { isLocationValid } from "@/utils/location-validator";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Button from "../ui/button";
 
-const inputFieldRegex = /^[A-Za-zÀ-ÿ ]+$/u;
-function hasOnlyWhitespaces(input: string) {
-  return input.trim() === "";
-}
-
 function isInputValid(input: string) {
-  return (
-    inputFieldRegex.test(input) && input !== "" && !hasOnlyWhitespaces(input)
-  );
+  return input !== "" && isLocationValid(input);
 }
 
 export default function SearchForm() {

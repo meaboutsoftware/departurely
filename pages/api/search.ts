@@ -1,19 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import axios, { AxiosResponse } from "axios";
+import { isLocationValid } from "@/utils/location-validator";
 
 const DEFAULT_PAGE = "0";
 const DEFAULT_LIMIT = "5";
 
-function hasOnlyWhitespaces(input: string) {
-  return input.trim() === "";
-}
-
-function isLocationParameterValid(parameter: string) {
-  return /^[A-Za-zÀ-ÿ ]+$/u.test(parameter) && !hasOnlyWhitespaces(parameter);
-}
-
 function isPagingParameterValid(parameter: string) {
-  return /^\d+$/.test(parameter) && !hasOnlyWhitespaces(parameter);
+  return /^\d+$/.test(parameter) && parameter.trim() !== "";
 }
 
 export default async function handler(
@@ -44,7 +37,7 @@ export default async function handler(
     return;
   }
 
-  if (!isLocationParameterValid(from) || !isLocationParameterValid(to)) {
+  if (!isLocationValid(from) || !isLocationValid(to)) {
     response.status(422).json({ error: "Invalid input" });
 
     return;
