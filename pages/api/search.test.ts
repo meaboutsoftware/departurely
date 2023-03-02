@@ -4,6 +4,11 @@ import handler from "./search";
 
 jest.mock("axios");
 
+const fromLocation = "Wil";
+const toLocation = "Lausanne";
+const defaultPage = "0";
+const defaultLimit = "5";
+
 describe("handler function", () => {
   const response: NextApiResponse = {
     status: jest.fn().mockReturnThis(),
@@ -12,8 +17,8 @@ describe("handler function", () => {
   const defaultRequest: NextApiRequest = {
     method: "GET",
     query: {
-      from: "Wil",
-      to: "Lausanne",
+      from: fromLocation,
+      to: toLocation,
     },
   } as unknown as NextApiRequest;
 
@@ -42,9 +47,9 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        to: "Lausanne",
-        page: "0",
-        limit: "5",
+        to: toLocation,
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -61,9 +66,9 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        page: "0",
-        limit: "5",
+        from: fromLocation,
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -80,9 +85,9 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
-        limit: "5",
+        from: fromLocation,
+        to: toLocation,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -99,9 +104,9 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
-        page: "0",
+        from: fromLocation,
+        to: toLocation,
+        page: defaultPage,
       },
     } as unknown as NextApiRequest;
 
@@ -119,9 +124,9 @@ describe("handler function", () => {
       ...defaultRequest,
       query: {
         from: "",
-        to: "Lausanne",
-        page: "0",
-        limit: "5",
+        to: toLocation,
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -138,10 +143,10 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
+        from: fromLocation,
         to: "",
-        page: "0",
-        limit: "5",
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -158,10 +163,10 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
+        from: fromLocation,
+        to: toLocation,
         page: "",
-        limit: "5",
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -178,9 +183,9 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
-        page: "0",
+        from: fromLocation,
+        to: toLocation,
+        page: defaultPage,
         limit: "",
       },
     } as unknown as NextApiRequest;
@@ -199,9 +204,9 @@ describe("handler function", () => {
       ...defaultRequest,
       query: {
         from: [],
-        to: "Lausanne",
-        page: "0",
-        limit: "5",
+        to: toLocation,
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -218,10 +223,10 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
+        from: fromLocation,
         to: [],
-        page: "0",
-        limit: "5",
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -238,10 +243,10 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
+        from: fromLocation,
+        to: toLocation,
         page: [],
-        limit: "5",
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -258,8 +263,8 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
+        from: fromLocation,
+        to: toLocation,
         page: "",
         limit: [],
       },
@@ -279,9 +284,9 @@ describe("handler function", () => {
       ...defaultRequest,
       query: {
         from: " ",
-        to: "Lausanne",
-        page: "0",
-        limit: "5",
+        to: toLocation,
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -298,10 +303,10 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
+        from: fromLocation,
         to: " ",
-        page: "0",
-        limit: "5",
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -318,10 +323,10 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
-        page: "0",
-        limit: "5",
+        from: fromLocation,
+        to: toLocation,
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -340,16 +345,16 @@ describe("handler function", () => {
   it("should return the data when all parameters are passed", async () => {
     // Arrange
     const mockApiResponse = {
-      data: [{ from: "Wil", to: "Lausanne" }],
+      data: [{ from: fromLocation, to: toLocation }],
     };
 
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
-        page: "0",
-        limit: "5",
+        from: fromLocation,
+        to: toLocation,
+        page: defaultPage,
+        limit: defaultLimit,
       },
     } as unknown as NextApiRequest;
 
@@ -367,8 +372,8 @@ describe("handler function", () => {
     const request: NextApiRequest = {
       ...defaultRequest,
       query: {
-        from: "Wil",
-        to: "Lausanne",
+        from: fromLocation,
+        to: toLocation,
         page: " ",
         limit: " ",
       },
