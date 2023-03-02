@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { useRouter } from "next/router";
 import getSearchResults from "@/utils/api";
@@ -50,29 +50,36 @@ describe("Connections", () => {
     },
   ];
 
-  it("should render a spinner component when connections are being loaded", () => {
+  it("should render a spinner component when connections are being loaded", async () => {
     // Arrange
-    (getSearchResults as jest.Mock).mockResolvedValue({ connections: [] });
+    (getSearchResults as jest.Mock).mockResolvedValue({
+      connections,
+    });
 
     // Act
     render(<Connections />);
 
     // Assert
-    expect(screen.getByTestId("spinner")).toBeInTheDocument();
+    await waitFor(() => {
+      const spinner = screen.getByTestId("spinner");
+      expect(spinner).toBeInTheDocument();
+    });
   });
 
   it("should render a no results component when connections fail to load", async () => {
     // Arrange
     (getSearchResults as jest.Mock).mockImplementation(() =>
-      // eslint-disable-next-line prefer-promise-reject-errors
-      Promise.reject("error")
+      Promise.reject(new Error("Something bad happened"))
     );
 
     // Act
     render(<Connections />);
 
     // Assert
-    expect(await screen.findByTestId("no-results")).toBeInTheDocument();
+    await waitFor(() => {
+      const noResults = screen.getByTestId("no-results");
+      expect(noResults).toBeInTheDocument();
+    });
   });
 
   it("should render a list of connections when they are loaded", async () => {
@@ -83,8 +90,10 @@ describe("Connections", () => {
     render(<Connections />);
 
     // Assert
-    const connectionList = await screen.findByTestId("items-list");
-    expect(connectionList).toBeInTheDocument();
+    await waitFor(() => {
+      const connectionList = screen.getByTestId("items-list");
+      expect(connectionList).toBeInTheDocument();
+    });
   });
 
   it("should render a 'Load more' button that calls the loadMoreConnectionsHandler function when clicked", async () => {
@@ -97,7 +106,7 @@ describe("Connections", () => {
 
     getSearchResultsMock.mockResolvedValue({ connections: [] });
     const button = await screen.findByTestId("load-more");
-    button.click();
+    await act(async () => button.click());
 
     // Assert
     await waitFor(() => expect(getSearchResults).toHaveBeenCalledTimes(2));
