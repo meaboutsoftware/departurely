@@ -257,7 +257,7 @@ describe("handler function", () => {
     expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
   });
 
-  it("should return 405 if HTTP method is not GET", async () => {
+  it("should return 405 when HTTP method is not GET", async () => {
     // Arrange
     const request: NextApiRequest = {
       method: "POST",
@@ -273,7 +273,7 @@ describe("handler function", () => {
     });
   });
 
-  it("should return 422 if any input is whitespace", async () => {
+  it("should return 422 when any input is whitespace", async () => {
     // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
@@ -293,7 +293,7 @@ describe("handler function", () => {
     expect(response.json).toHaveBeenCalledWith({ error: "Invalid input" });
   });
 
-  it("should return 500 if there is an unknown error", async () => {
+  it("should return 500 when there is an unknown error", async () => {
     // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
@@ -317,7 +317,7 @@ describe("handler function", () => {
     });
   });
 
-  it("should return the data if all parameters are passed", async () => {
+  it("should return the data when all parameters are passed", async () => {
     // Arrange
     const mockApiResponse = {
       data: [{ from: "Wil", to: "Lausanne" }],
@@ -342,7 +342,7 @@ describe("handler function", () => {
     expect(response.status).toHaveBeenCalledWith(200);
   });
 
-  it("should return default values for page and limit if they are whitespace", async () => {
+  it("should return default values for page and limit when they are whitespace", async () => {
     // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
