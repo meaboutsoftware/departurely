@@ -21,7 +21,64 @@ describe("handler function", () => {
     jest.clearAllMocks();
   });
 
-  it("should return 400 if any required query parameter is missing", async () => {
+  it("should return 400 when from parameter is missing", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        to: "Lausanne",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when to parameter is missing", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when page parameter is missing", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when limit parameter is missing", async () => {
     // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
@@ -40,7 +97,7 @@ describe("handler function", () => {
     expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
   });
 
-  it("should return 400 if any input is empty", async () => {
+  it("should return 400 when from input is empty", async () => {
     // Arrange
     const request: NextApiRequest = {
       ...defaultRequest,
@@ -49,6 +106,146 @@ describe("handler function", () => {
         to: "Lausanne",
         page: "0",
         limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when to input is empty", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when page input is empty", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: "",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when limit input is empty", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: "0",
+        limit: "",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when from input is not a string", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: [],
+        to: "Lausanne",
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when to input is not a string", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: [],
+        page: "0",
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when page input is not a string", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: [],
+        limit: "5",
+      },
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(400);
+    expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
+  });
+
+  it("should return 400 when limit input is not a string", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      ...defaultRequest,
+      query: {
+        from: "Wil",
+        to: "Lausanne",
+        page: "",
+        limit: [],
       },
     } as unknown as NextApiRequest;
 
