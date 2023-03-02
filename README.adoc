@@ -44,3 +44,16 @@ All the relevant checks are integrated into:
 
 . each commit (lint and tests (unit))
 . CI/CD pipeline (lint, tests (unit & e2e), build of release candidate & production)
+
+## Commits
+
+If you would like to commit to this repository, you have to follow https://www.conventionalcommits.org/en/v1.0.0/#summary[Conventional Commits].
+
+There is a commit-hook which will automatically check if your commit message is correct or not. You can find in `+.husky+` folder. 
+
+The cheatsheet can be found https://cheatography.com/albelop/cheat-sheets/conventional-commits/[here].
+
+Additionally, your comit should be atomic - this means that it should touch one area at the same time. What does it mean? E.g. you want to rename a method that touches 4 files and additionally create a new method. In such situation, you will have to split your commit to 2 separate ones:
+
+. refactor: rename method xyz
+. feat: add new xyz method
