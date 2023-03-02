@@ -21,6 +21,22 @@ describe("handler function", () => {
     jest.clearAllMocks();
   });
 
+  it("should return 405 when HTTP method is not GET", async () => {
+    // Arrange
+    const request: NextApiRequest = {
+      method: "POST",
+    } as unknown as NextApiRequest;
+
+    // Act
+    await handler(request, response);
+
+    // Assert
+    expect(response.status).toHaveBeenCalledWith(405);
+    expect(response.json).toHaveBeenCalledWith({
+      error: "Method not allowed.",
+    });
+  });
+
   it("should return 400 when from parameter is missing", async () => {
     // Arrange
     const request: NextApiRequest = {
@@ -255,22 +271,6 @@ describe("handler function", () => {
     // Assert
     expect(response.status).toHaveBeenCalledWith(400);
     expect(response.json).toHaveBeenCalledWith({ error: "Bad request" });
-  });
-
-  it("should return 405 when HTTP method is not GET", async () => {
-    // Arrange
-    const request: NextApiRequest = {
-      method: "POST",
-    } as unknown as NextApiRequest;
-
-    // Act
-    await handler(request, response);
-
-    // Assert
-    expect(response.status).toHaveBeenCalledWith(405);
-    expect(response.json).toHaveBeenCalledWith({
-      error: "Method not allowed.",
-    });
   });
 
   it("should return 422 when any input is whitespace", async () => {
