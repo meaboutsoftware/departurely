@@ -26,7 +26,7 @@ If you would like to start working with this project, there are several points t
 . Install `+Node.js 14.6.0+` or newer.
 . Clone the repository.
 . Run `+npm install+` to get all node packages.
-. Create your own `+.env.local+` file in the root of the project. Next, add this variable: `+API=http://transport.opendata.ch/v1+`
+. Create your own `+.env.local+` file in the root of the project. Next, add 2 variables: `+API=http://transport.opendata.ch/v1+` (to call connections API) and `+APPLICATION=http://localhost:3000+` (to call by end-to-end tests).
 . Run `+npm run dev+`
 . Open `+http://localhost:3000+`. Note that the port might differ (especially if you run another process that uses port `+:3000+`).
 . You should see the main page that contains search form.
