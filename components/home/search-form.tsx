@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import Button from "../ui/button";
 
 const inputFieldRegex = /^[A-Za-zÀ-ÿ ]+$/u;
 function hasOnlyWhitespaces(input: string) {
@@ -97,18 +98,17 @@ export default function SearchForm() {
             </div>
           </div>
           <div>
-            <button
-              className={`w-full py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg ${
+            <Button
+              testId="search-form-submit"
+              className={`w-full ${
                 fromError || toError
                   ? "opacity-50 cursor-not-allowed"
                   : "opacity-100 cursor-pointer"
               }`}
-              data-testid="search-form-submit"
-              type="submit"
               disabled={fromError || toError}
-            >
-              Search
-            </button>
+              text="Search"
+              type="submit"
+            />
           </div>
         </form>
       </div>

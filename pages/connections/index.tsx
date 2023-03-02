@@ -2,6 +2,7 @@
 import ConnectionList, {
   ConnectionListItem,
 } from "@/components/connections/connection-list";
+import Button from "@/components/ui/button";
 import NoResults from "@/components/ui/no-results";
 import Spinner from "@/components/ui/spinner";
 import getSearchResults from "@/utils/api";
@@ -19,9 +20,9 @@ export default function Connections() {
   const [error, setError] = useState(false);
   const { from, to } = router.query;
 
-  function loadMoreConnectionsHandler() {
+  const loadMoreConnectionsHandler = () => {
     setCurrentPage(currentPage + 1);
-  }
+  };
 
   useEffect(() => {
     setIsInProgress(true);
@@ -64,19 +65,18 @@ export default function Connections() {
         <>
           <ConnectionList connections={loadedConnections} />
           <div className="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
-            <button
-              className={`w-3/5 px-20 py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg ${
+            <Button
+              testId="load-more"
+              className={`w-3/5 px-20 ${
                 isInProgress
                   ? "opacity-50 cursor-not-allowed"
                   : "opacity-100 cursor-pointer"
               }`}
-              data-testid="load-more"
+              disabled={isInProgress}
+              text="Load more"
               type="button"
               onClick={loadMoreConnectionsHandler}
-              disabled={isInProgress}
-            >
-              Load more
-            </button>
+            />
           </div>
         </>
       ) : isInProgress ? (
