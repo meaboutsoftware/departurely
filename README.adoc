@@ -16,3 +16,18 @@ What can you find in this project?
 * End-to-end tests written with Playwright
 * CI/CD pipeline in GitHub Actions
 * Deployment to Vercel
+
+## How to start?
+
+If you would like to start working with this project, there are several points to follow:
+
+. Let me know that you are willing to add or edit existing code - this way I can add you to contributors.
+. Download your favorite IDE :)
+. Install `+Node.js 14.6.0+` or newer.
+. Clone the repository.
+. Run `+npm install+` to get all node packages.
+. Create your own `+.env.local+` file in the root of the project. Next, add this variable: `+API=http://transport.opendata.ch/v1+`
+. Run `+npm run dev+`
+. Open `+http://localhost:3000+`. Note that the port might differ (especially if you run another process that uses port `+:3000+`).
+. You should see the main page that contains search form.
+. As there is no auto-suggestion for places in Switzerland, you have to type it manually. You can type whatever city in Switzerland, e.g. type _Wil_ to _from_ field and _Geneve_ to _to_ field.
