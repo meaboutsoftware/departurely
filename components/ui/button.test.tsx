@@ -4,16 +4,19 @@ import "@testing-library/jest-dom";
 import Button from "./button";
 
 describe("Button", () => {
+  const buttonText = "Click";
+  const buttonTestId = "test-button-id";
+
   it("should render successfully when all required values are defined", () => {
     // Arrange
 
     // Act
-    render(<Button testId="test-button" text="Click" />);
+    render(<Button testId={buttonTestId} text={buttonText} />);
 
     // Assert
-    const button = screen.getByTestId("test-button");
+    const button = screen.getByTestId(buttonTestId);
     expect(button).toBeInTheDocument();
-    expect(button).toHaveTextContent("Click");
+    expect(button).toHaveTextContent(buttonText);
   });
 
   it("should contain all optional fields with default values when not defined", () => {
@@ -24,10 +27,10 @@ describe("Button", () => {
     const defaultDisabled = false;
 
     // Act
-    render(<Button testId="test-button" text="Click" />);
+    render(<Button testId={buttonTestId} text={buttonText} />);
 
     // Assert
-    const button = screen.getByTestId("test-button") as HTMLButtonElement;
+    const button = screen.getByTestId(buttonTestId) as HTMLButtonElement;
     expect(button).toHaveClass(defaultClass);
     expect(button.type).toBe(defaultType);
     expect(button.disabled).toBe(defaultDisabled);
@@ -38,11 +41,15 @@ describe("Button", () => {
 
     // Act
     render(
-      <Button testId="test-button" text="Click" className="additional-class" />
+      <Button
+        testId={buttonTestId}
+        text={buttonText}
+        className="additional-class"
+      />
     );
 
     // Assert
-    const button = screen.getByTestId("test-button");
+    const button = screen.getByTestId(buttonTestId);
     expect(button).toHaveClass("additional-class");
   });
 
@@ -50,10 +57,10 @@ describe("Button", () => {
     // Arrange
 
     // Act
-    render(<Button testId="test-button" text="Click" type="submit" />);
+    render(<Button testId={buttonTestId} text={buttonText} type="submit" />);
 
     // Assert
-    const button = screen.getByTestId("test-button") as HTMLButtonElement;
+    const button = screen.getByTestId(buttonTestId) as HTMLButtonElement;
     expect(button.type).toBe("submit");
   });
 
@@ -61,10 +68,10 @@ describe("Button", () => {
     // Arrange
 
     // Act
-    render(<Button testId="test-button" text="Click" disabled />);
+    render(<Button testId={buttonTestId} text={buttonText} disabled />);
 
     // Assert
-    const button = screen.getByTestId("test-button") as HTMLButtonElement;
+    const button = screen.getByTestId(buttonTestId) as HTMLButtonElement;
     expect(button).toBeDisabled();
   });
 
@@ -73,10 +80,12 @@ describe("Button", () => {
     const handleClick = jest.fn();
 
     // Act
-    render(<Button testId="test-button" text="Click" onClick={handleClick} />);
+    render(
+      <Button testId={buttonTestId} text={buttonText} onClick={handleClick} />
+    );
 
     // Assert
-    const button = screen.getByTestId("test-button");
+    const button = screen.getByTestId(buttonTestId);
     fireEvent.click(button);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
