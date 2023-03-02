@@ -86,3 +86,17 @@ To run tests locally, you can use `+npm run test-e2e+`.
 Test files are saved in format `+.spec.ts+`.
 
 Tests are lying in `+e2e+` folder. At the moment there is only 1 file related to search functionality. If there will be more features, it is suggested to split it into features folder. Furthermore, it would be nice to define steps in Gherkin to make it user-friendly.
+
+## Deployment
+
+The selected model for the application is continuous deployment. This means that there is no manual step needed. It follows following workflow:
+
+. Lint, build and run unit tests.
+. Deploy release candidate (Vercel preview environment).
+. Run end-to-end tests on release candidate.
+. Deploy production environment.
+
+If any of the above steps fails, the workflow is stopped. This way we make sure that the code deployed to production is working correctly.
+
+At some point it would be great to put metrics & monitoring (e.g. Sentry, Prometheus, Grafana) and based on defined policies increase the traffic on release candidate before deploying the newest version into production.
+
