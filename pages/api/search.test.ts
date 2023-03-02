@@ -4,12 +4,12 @@ import handler from "./search";
 
 jest.mock("axios");
 
-const fromLocation = "Wil";
-const toLocation = "Lausanne";
-const defaultPage = "0";
-const defaultLimit = "5";
-
 describe("handler function", () => {
+  const fromLocation = "Wil";
+  const toLocation = "Lausanne";
+  const defaultPage = "0";
+  const defaultLimit = "5";
+
   const response: NextApiResponse = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
