@@ -4,7 +4,7 @@ export default function NoResults() {
   return (
     <div
       data-testid="no-results"
-      className="flex items-center justify-center h-full"
+      className="fixed top-0 left-0 w-full h-full flex items-center justify-center"
     >
       <div className="text-center">
         <svg
