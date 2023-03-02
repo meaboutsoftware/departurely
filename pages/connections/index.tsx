@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import ConnectionList, {
   ConnectionListItem,
 } from "@/components/connections/connection-list";
@@ -44,10 +45,6 @@ export default function Connections() {
     return <NoResults />;
   }
 
-  if (isInProgress) {
-    return <Spinner />;
-  }
-
   return (
     <>
       <Head>
@@ -77,6 +74,8 @@ export default function Connections() {
             </button>
           </div>
         </>
+      ) : isInProgress ? (
+        <Spinner />
       ) : (
         <NoResults />
       )}
