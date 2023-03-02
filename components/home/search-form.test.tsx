@@ -8,6 +8,9 @@ jest.mock("next/router", () => ({
 }));
 
 describe("SearchForm", () => {
+  const fromLocation = "Wil";
+  const toLocation = "Lausanne";
+
   it("should render all DOM elements when all values are defined", () => {
     // Arrange
 
@@ -30,10 +33,10 @@ describe("SearchForm", () => {
     // Act
     render(<SearchForm />);
     const fromInput = screen.getByTestId("search-form-from");
-    fireEvent.change(fromInput, { target: { value: "Wil" } });
+    fireEvent.change(fromInput, { target: { value: fromLocation } });
 
     // Assert
-    expect(fromInput).toHaveValue("Wil");
+    expect(fromInput).toHaveValue(fromLocation);
   });
 
   it("should update 'to' input when user types in it", () => {
@@ -42,10 +45,10 @@ describe("SearchForm", () => {
 
     // Act
     const toInput = screen.getByTestId("search-form-to");
-    fireEvent.change(toInput, { target: { value: "Lausanne" } });
+    fireEvent.change(toInput, { target: { value: toLocation } });
 
     // Assert
-    expect(toInput).toHaveValue("Lausanne");
+    expect(toInput).toHaveValue(toLocation);
   });
 
   it("should call router.push when form is submitted", () => {
@@ -79,7 +82,7 @@ describe("SearchForm", () => {
     // Act
     render(<SearchForm />);
     const fromInput = screen.getByTestId("search-form-from");
-    fireEvent.change(fromInput, { target: { value: "Wil1" } });
+    fireEvent.change(fromInput, { target: { value: `${fromLocation}1` } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
@@ -94,7 +97,7 @@ describe("SearchForm", () => {
     // Act
     render(<SearchForm />);
     const fromInput = screen.getByTestId("search-form-from");
-    fireEvent.change(fromInput, { target: { value: "Wil!" } });
+    fireEvent.change(fromInput, { target: { value: `${fromLocation}!` } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
@@ -124,7 +127,7 @@ describe("SearchForm", () => {
     // Act
     render(<SearchForm />);
     const toInput = screen.getByTestId("search-form-to");
-    fireEvent.change(toInput, { target: { value: "Wil1" } });
+    fireEvent.change(toInput, { target: { value: `${fromLocation}1` } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
@@ -139,7 +142,7 @@ describe("SearchForm", () => {
     // Act
     render(<SearchForm />);
     const toInput = screen.getByTestId("search-form-to");
-    fireEvent.change(toInput, { target: { value: "Wil!" } });
+    fireEvent.change(toInput, { target: { value: `${fromLocation}!` } });
     fireEvent.submit(screen.getByTestId("search-form"));
 
     // Assert
