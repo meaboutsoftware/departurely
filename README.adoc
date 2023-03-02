@@ -57,3 +57,32 @@ Additionally, your comit should be atomic - this means that it should touch one 
 
 . refactor: rename method xyz
 . feat: add new xyz method
+
+## Tests
+
+Referring to the test pyramid, application is covered with 2 types of tests:
+
+. End-to-end -> slower, subject to artifacts, expensive, thus the amount of it is limited to business critical paths
+. Unit tests -> faster, reliable, cheaper, thus the amount of it is not limited at all
+
+### Unit tests
+
+Tests are run & written using Jest.
+
+To run tests locally, you can use `+npm run test+`. There you can decide if you want to watch all tests or just a part of it - follow CLI tips.
+
+Tests files are saved in format `+.test.tsx+` for React components and `+.test.ts+` for other types.
+
+Each test is lying next to execution code. The only exceptions are tests related to pages - they can not be there as they are treated as pages during pre-rendering.
+
+For references on how to write them, look into existing tests.
+
+### End-to-end tests
+
+Tests are run & written using Playwright.
+
+To run tests locally, you can use `+npm run test-e2e+`.
+
+Test files are saved in format `+.spec.ts+`.
+
+Tests are lying in `+e2e+` folder. At the moment there is only 1 file related to search functionality. If there will be more features, it is suggested to split it into features folder. Furthermore, it would be nice to define steps in Gherkin to make it user-friendly.
