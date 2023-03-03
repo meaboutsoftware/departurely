@@ -20,7 +20,11 @@ function Button({
   return (
     <button
       data-testid={testId}
-      className={`${className} py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg`}
+      className={`${className} py-2 mt-6 text-white bg-teal-500 hover:bg-teal-700 rounded-lg ${
+        disabled
+          ? "opacity-50 cursor-not-allowed"
+          : "opacity-100 cursor-pointer"
+      }`}
       disabled={disabled}
       // eslint-disable-next-line react/button-has-type
       type={type}

@@ -94,11 +94,7 @@ export default function SearchForm() {
           <div>
             <Button
               testId="search-form-submit"
-              className={`w-full ${
-                fromError || toError
-                  ? "opacity-50 cursor-not-allowed"
-                  : "opacity-100 cursor-pointer"
-              }`}
+              className="w-full"
               disabled={fromError || toError}
               text="Search"
               type="submit"

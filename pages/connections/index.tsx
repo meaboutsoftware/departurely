@@ -67,11 +67,7 @@ export default function Connections() {
           <div className="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
             <Button
               testId="load-more"
-              className={`w-3/5 px-20 ${
-                isInProgress
-                  ? "opacity-50 cursor-not-allowed"
-                  : "opacity-100 cursor-pointer"
-              }`}
+              className="w-3/5 px-20"
               disabled={isInProgress}
               text="Load more"
               type="button"
