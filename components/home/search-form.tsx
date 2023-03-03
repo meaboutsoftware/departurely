@@ -3,10 +3,6 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Button from "@/components/ui/button";
 
-function isInputValid(input: string) {
-  return input !== "" && isLocationValid(input);
-}
-
 export default function SearchForm() {
   const router = useRouter();
 
@@ -19,7 +15,7 @@ export default function SearchForm() {
   const onFromChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
 
-    if (isInputValid(input)) {
+    if (isLocationValid(input)) {
       setFromError(false);
     } else {
       setFromError(true);
@@ -31,7 +27,7 @@ export default function SearchForm() {
   const onToChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
 
-    if (isInputValid(input)) {
+    if (isLocationValid(input)) {
       setToError(false);
     } else {
       setToError(true);
@@ -43,10 +39,15 @@ export default function SearchForm() {
   const searchHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    router.push({
-      pathname: "/connections",
-      query: { from, to },
-    });
+    if (isLocationValid(from) && isLocationValid(to)) {
+      router.push({
+        pathname: "/connections",
+        query: { from, to },
+      });
+    } else {
+      setFromError(!isLocationValid(from));
+      setToError(!isLocationValid(to));
+    }
   };
 
   return (
@@ -66,7 +67,6 @@ export default function SearchForm() {
                 type="text"
                 value={from}
                 onChange={onFromChange}
-                required
               />
               {fromError && (
                 <div className="text-red-500 text-sm mt-2">
@@ -82,7 +82,6 @@ export default function SearchForm() {
                 type="text"
                 value={to}
                 onChange={onToChange}
-                required
               />
               {toError && (
                 <div className="text-red-500 text-sm mt-2">
