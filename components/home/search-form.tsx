@@ -1,7 +1,7 @@
 import { isLocationValid } from "@/utils/location-validator";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Button from "../ui/button";
+import Button from "@/components/ui/button";
 
 function isInputValid(input: string) {
   return input !== "" && isLocationValid(input);
