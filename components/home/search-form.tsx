@@ -2,6 +2,7 @@ import { isLocationValid } from "@/utils/location-validator";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Button from "@/components/ui/button";
+import InputField from "@/components/ui/input";
 
 export default function SearchForm() {
   const router = useRouter();
@@ -59,35 +60,28 @@ export default function SearchForm() {
         <h3 className="text-2xl text-center">Find train connections</h3>
         <form onSubmit={searchHandler}>
           <div className="mt-4">
-            <div>
-              <input
-                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black"
-                data-testid="search-form-from"
+            <div className="mt-4">
+              <InputField
+                testId="search-form-from"
+                errorMessage="Please enter a valid From location"
+                hasError={fromError}
                 placeholder="From"
                 type="text"
                 value={from}
                 onChange={onFromChange}
               />
-              {fromError && (
-                <div className="text-red-500 text-sm mt-2">
-                  Please enter a valid From location
-                </div>
-              )}
             </div>
+
             <div className="mt-4">
-              <input
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black"
-                data-testid="search-form-to"
+              <InputField
+                testId="search-form-to"
+                errorMessage="Please enter a valid To location"
+                hasError={toError}
                 placeholder="To"
                 type="text"
                 value={to}
                 onChange={onToChange}
               />
-              {toError && (
-                <div className="text-red-500 text-sm mt-2">
-                  Please enter a valid To location
-                </div>
-              )}
             </div>
           </div>
           <div>
