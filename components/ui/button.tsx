@@ -9,7 +9,7 @@ type ButtonProperties = {
   onClick?: () => void;
 };
 
-function Button({
+export default function Button({
   testId,
   className,
   disabled,
@@ -41,5 +41,3 @@ Button.defaultProps = {
   type: "button",
   onClick: () => {},
 };
-
-export default Button;
